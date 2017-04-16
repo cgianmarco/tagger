@@ -1,0 +1,6 @@
+number_of_tags=20
+single_tags=True
+double_tags=True
+occurrence_matrix_visualized=10
+occurrence_matrix_log=True
+tagged_products_log=True
