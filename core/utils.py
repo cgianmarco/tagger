@@ -17,7 +17,7 @@ def no_stopwords(input):
 		if word not in stopwords.words('italian'):
 			result.append(word)
 		else:
-			result.append('---')
+		   result.append('---')
 	return result 
 
 
