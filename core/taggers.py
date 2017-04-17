@@ -31,7 +31,7 @@ class SingleWordTagger:
 	def generate_factorization_matrix(self):
 		from collections import Counter
 
-		self.tags = ['collana', 'deck', 'pegasus', 'minnie', 'pokemon', 'carta']
+		# self.tags = ['collana', 'deck', 'pegasus', 'minnie', 'pokemon', 'carta']
 		counter = Counter()
 
 		for line in self.dataset.lines:
@@ -69,7 +69,6 @@ class DoubleWordTagger:
 		self.tags = utils.remove_separators(self.tags)
 
 		if save:
-			import numpy as np
 			with open("generated/double_tags.txt", "wb") as f:
 				np.savetxt(f, np.asarray(self.tags), delimiter="-", fmt="%s")
 
