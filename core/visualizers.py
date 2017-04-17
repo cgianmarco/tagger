@@ -56,4 +56,4 @@ class MatrixVisualizer:
 		for t in ax.yaxis.get_major_ticks(): 
 		    t.tick1On = False 
 		    t.tick2On = False
-		plt.savefig("generated/matrix.png")  
+		plt.savefig("generated/visualization/matrix.png")  
