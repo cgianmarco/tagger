@@ -15,10 +15,6 @@ class MatrixVisualizer:
 		fig, ax = plt.subplots()
 		heatmap = ax.pcolor(mf, cmap=plt.cm.Blues, alpha=0.9)
 
-		##################################################
-		## FORMAT ##
-		##################################################
-
 		fig = plt.gcf()
 		fig.set_size_inches(8,8)
 
@@ -34,8 +30,6 @@ class MatrixVisualizer:
 		ax.xaxis.tick_top()
 
 		# Set the labels
-
-		# label source:https://en.wikipedia.org/wiki/Basketball_statistics
 		labels = tags
 
 		# note I could have used nba_sort.columns but made "labels" instead
