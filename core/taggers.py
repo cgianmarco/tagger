@@ -25,8 +25,6 @@ class SingleWordTagger:
 
 
 
-	def get_tags(self):
-		return self.tags
 
 	def generate_factorization_matrix(self):
 		from collections import Counter
@@ -72,5 +70,3 @@ class DoubleWordTagger:
 			with open("generated/double_tags.txt", "wb") as f:
 				np.savetxt(f, np.asarray(self.tags), delimiter="-", fmt="%s")
 
-	def get_tags(self):
-		return self.tags
