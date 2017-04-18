@@ -1,6 +1,6 @@
 from core.dataset import *
 from core.taggers import SingleWordTagger, DoubleWordTagger
-from core.visualizers import MatrixVisualizer
+from core.visualizers import MatrixVisualizer, WordVectorVisualizer
 
 n_single_tags = 500
 n_double_tags = 500
@@ -15,4 +15,7 @@ dwt.run(n_double_tags)
 
 # mv = MatrixVisualizer(swt)
 # mv.run();
+
+wvv = WordVectorVisualizer(swt)
+wvv.run(5)
 

@@ -50,4 +50,29 @@ class MatrixVisualizer:
 		for t in ax.yaxis.get_major_ticks(): 
 		    t.tick1On = False 
 		    t.tick2On = False
-		plt.savefig("generated/visualization/matrix.png")  
+		plt.savefig("generated/visualization/matrix.png")
+
+
+
+
+
+class WordVectorVisualizer:
+
+	def __init__(self, tagger):
+		self.tagger = tagger
+
+	def run(self, n_tags):
+		tags = self.tagger.tags[:n_tags]
+		mf = self.tagger.mf
+
+		la = np.linalg
+
+		U, s, Vh = la.svd(mf, full_matrices=False)
+
+		for i in xrange(len(tags)):
+			plt.text(U[i, 0], U[i, 1], tags[i])
+
+		plt.axis([-1.2, 1.2, -1.2, 1.2])
+
+
+		plt.savefig("generated/visualization/word_vectors.png")
