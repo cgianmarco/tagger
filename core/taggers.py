@@ -13,38 +13,26 @@ class SingleWordTagger:
 		self.dataset = dataset
 
 	def run(self, n_tags, save=True, mf=True):
-		n_features = 5000
-		n_topics = 20
-		n_top_words = 5
 
 		tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
-                                max_features=n_features,
-                                stop_words=stopwords.words('italian'))
+                                max_features=n_tags, token_pattern='(?u)\\b\\w+\\b',
+                                stop_words=stopwords.words('italian'))		
 
-		
+		vectorized = tf_vectorizer.fit_transform(self.dataset.lines)
 
-		self.mf = tf_vectorizer.fit_transform(self.dataset.lines)
-
-		from collections import Counter
-
-		counter = Counter()
-
-		for k, v in self.mf:
-			counter[tf_vectorizer.get_params()[k[1]]] += v
-
-		self.most_common = np.asarray([ word for word in counter.most_common(n_tags)])
+		self.mf = vectorized.todense()
+		self.tags = tf_vectorizer.vocabulary_
 
 
 		if save:
+			# save tags
 			with open("generated/tags.txt", "wb") as f:
-				np.savetxt(f, self.most_common, fmt="%s")
+				np.savetxt(f, self.tags.keys(), fmt="%s")
 		if mf:
-			self.save_factorization_matrix()
-
-
-	def save_factorization_matrix(self):
-		with open("generated/matrix.txt", "wb") as f:
+			# save factorization matrix
+			with open("generated/matrix.txt", "wb") as f:
 				np.savetxt(f, self.mf, fmt="%s")
+		
 
 
 

@@ -2,7 +2,7 @@ from core.dataset import *
 from core.taggers import SingleWordTagger, DoubleWordTagger
 from core.visualizers import MatrixVisualizer, WordVectorVisualizer
 
-n_single_tags = 5
+n_single_tags = 500
 n_double_tags = 500
 
 dataset = Dataset()
