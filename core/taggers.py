@@ -14,24 +14,31 @@ class SingleWordTagger:
 
 	def run(self, n_tags, save=True, mf=True):
 
-		tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
-                                max_features=n_tags, token_pattern='(?u)\\b\\w+\\b',
-                                stop_words=stopwords.words('italian'))		
+		self.vectorizer = CountVectorizer(max_df=0.95, min_df=2,
+                                max_features=n_tags, token_pattern='(?u)\\b\\w\\w\\w+\\b',
+                                stop_words=stopwords.words('italian'))
 
-		vectorized = tf_vectorizer.fit_transform(self.dataset.lines)
+		self.docterm = self.vectorizer.fit_transform(self.dataset.lines)
 
-		self.mf = vectorized.todense()
-		self.tags = tf_vectorizer.vocabulary_
+		self.cooccurrence = self.docterm.T * self.docterm
+
+		self.tag2frequency = self.vectorizer.vocabulary_
+
+		self.tags = self.tag2frequency.keys()
 
 
 		if save:
 			# save tags
 			with open("generated/tags.txt", "wb") as f:
-				np.savetxt(f, self.tags.keys(), fmt="%s")
+				np.savetxt(f, self.tags, fmt="%s")
 		if mf:
 			# save factorization matrix
 			with open("generated/matrix.txt", "wb") as f:
-				np.savetxt(f, self.mf, fmt="%s")
+				np.savetxt(f, self.docterm.todense(), fmt="%s")
+
+
+	def get_tagged_elements(self):
+		return len(filter(lambda elem: elem != 0, np.sum(self.docterm.todense(), axis=1)))
 		
 
 
@@ -42,17 +49,34 @@ class DoubleWordTagger:
 		self.tags = []
 		self.dataset = dataset
 
-	def run(self, n_tags, save=True):
-		bgs = bigrams(self.dataset.words)
-		fdist_bigrams = FreqDist(bgs)
+	def run(self, n_tags, save=True, mf=True):
 
-		for k,v in fdist_bigrams.most_common(n_tags):
-			self.tags.append(k)
-		self.tags = utils.remove_separators(self.tags)
+		self.vectorizer = CountVectorizer(max_df=0.95, min_df=2,
+                                max_features=n_tags, token_pattern='(?u)\\b\\w\\w\\w+\\b',
+                                stop_words=stopwords.words('italian'), ngram_range=(2,2))
+
+		self.docterm = self.vectorizer.fit_transform(self.dataset.lines)
+
+		self.cooccurrence = self.docterm.T * self.docterm
+
+		self.tag2frequency = self.vectorizer.vocabulary_
+
+		self.tags = self.tag2frequency.keys()
+
 
 		if save:
+			# save tags
 			with open("generated/double_tags.txt", "wb") as f:
-				np.savetxt(f, np.asarray(self.tags), delimiter="-", fmt="%s")
+				np.savetxt(f, self.tags, fmt="%s")
+		if mf:
+			# save factorization matrix
+			with open("generated/double_matrix.txt", "wb") as f:
+				np.savetxt(f, self.docterm.todense(), fmt="%s")
 
-	def get_tags(self):
-		return self.tags
+		# if save:
+		# 	with open("generated/double_tags.txt", "wb") as f:
+		# 		np.savetxt(f, np.asarray(self.tags), delimiter="-", fmt="%s")
+
+	def get_tagged_elements(self):
+		return len(filter(lambda elem: elem != 0, np.sum(self.docterm.todense(), axis=1)))
+

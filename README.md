@@ -5,6 +5,11 @@
 [Generated double word tags](generated/double_tags.txt)
 
 
-## Heatmap
+## Heatmaps
 
-![alt tag](generated/visualization/matrix.png)
+![alt tag](generated/visualization/single_matrix.png)
+
+
+
+
+![alt tag](generated/visualization/double_matrix.png)
