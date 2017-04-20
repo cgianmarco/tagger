@@ -1,8 +1,10 @@
 # tagger
 
-[Generated single word tags](generated/tags.txt)
+[Generated single word tags](generated/tags_single.txt)
 
-[Generated double word tags](generated/double_tags.txt)
+[Generated double word tags](generated/tags_double.txt)
+
+[Generated double word tags](generated/tags_triple.txt)
 
 
 ## Heatmaps
@@ -13,3 +15,8 @@
 
 
 ![alt tag](generated/visualization/double_matrix.png)
+
+
+
+
+![alt tag](generated/visualization/triple_matrix.png)
