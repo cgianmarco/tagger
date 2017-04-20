@@ -4,7 +4,7 @@
 
 [Generated double word tags](generated/tags_double.txt)
 
-[Generated double word tags](generated/tags_triple.txt)
+[Generated triple word tags](generated/tags_triple.txt)
 
 
 ## Heatmaps
