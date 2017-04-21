@@ -20,7 +20,7 @@ double_tagger = {
 					'max_features': 500, 
 					'token_pattern': '(?u)\\b\\w\\w+\\b',
 					'ngram_range': (1,4),
-                    'stop_words': stopwords.words('italian')
+					'stop_words': stopwords.words('italian')
 				}
 
 triple_tagger = { 	
