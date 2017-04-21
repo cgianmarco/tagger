@@ -41,7 +41,7 @@ Then create new Tagger, run it on dataset and print number of tagged elements
 myTagger = Tagger(my_conf)
 myTagger.run(500, dataset.lines, "myconf")
 
-print "Tagged elements with single tags: " + str(myTagger.get_tagged_elements())
+print "Tagged elements with myconf: " + str(myTagger.get_tagged_elements())
 ```
 
 Generated tags can be found in generated/tags_myconf.txt
