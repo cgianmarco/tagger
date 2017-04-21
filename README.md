@@ -27,11 +27,11 @@ In run.py create new configuration dictionary
 
 ```python
 my_conf = { 	
-			'max_df': 0.95, 
-			'min_df': 2,
-			'token_pattern': '(?u)\\b\\w\\w+\\b',
-			'ngram_range': (2,2)
-			}
+		    'max_df': 0.95, 
+		    'min_df': 2,
+		    'token_pattern': '(?u)\\b\\w\\w+\\b',
+		    'ngram_range': (2,2)
+		    }
 ```
 
 
