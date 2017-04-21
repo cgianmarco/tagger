@@ -19,7 +19,8 @@ double_tagger = {
 					'min_df': 2,
 					'max_features': 500, 
 					'token_pattern': '(?u)\\b\\w\\w+\\b',
-                    'ngram_range': (2,2)
+					'ngram_range': (1,4),
+                    'stop_words': stopwords.words('italian')
 				}
 
 triple_tagger = { 	
@@ -27,7 +28,7 @@ triple_tagger = {
 					'min_df': 2,
 					'max_features': 500, 
 					'token_pattern': '(?u)\\b\\w\\w+\\b',
-                    'ngram_range': (3,3)
+					'ngram_range': (3,3)
 				}
 
 
