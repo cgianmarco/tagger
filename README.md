@@ -7,16 +7,17 @@
 [Generated triple word tags](generated/tags_triple.txt)
 
 
-## Heatmaps
+# Testing
 
-![alt tag](generated/visualization/single_matrix.png)
+'''
+python test/taggers_unittest.py -v
 
-
-
-
-![alt tag](generated/visualization/double_matrix.png)
+'''
 
 
+# Usage
 
+'''
+python run.py
 
-![alt tag](generated/visualization/triple_matrix.png)
+'''
