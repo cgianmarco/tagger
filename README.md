@@ -9,15 +9,15 @@
 
 # Testing
 
-'''
+```
 python test/taggers_unittest.py -v
 
-'''
+```
 
 
 # Usage
 
-'''
+```
 python run.py
 
-'''
+```
