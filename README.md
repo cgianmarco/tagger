@@ -25,7 +25,7 @@ python run.py
 
 In run.py create new configuration dictionary
 
-```
+```python
 my_conf = { 	
 					'max_df': 0.95, 
 					'min_df': 2,
@@ -37,7 +37,7 @@ my_conf = {
 
 Then create new Tagger, run it on dataset and print number of tagged elements
 
-```
+```python
 myTagger = Tagger(my_conf)
 myTagger.run(500, dataset.lines, "myconf")
 
