@@ -5,11 +5,9 @@ from nltk.corpus import stopwords
 
 dataset = Dataset("dataset/prodotti.csv")
 
-
 single_tagger = { 	
 					'max_df': 0.95, 
 					'min_df': 2,
-					'max_features': 500, 
 					'token_pattern': '(?u)\\b\\w\\w\\w+\\b',
 					'stop_words': stopwords.words('italian')
 				}
@@ -17,29 +15,26 @@ single_tagger = {
 double_tagger = { 	
 					'max_df': 0.95, 
 					'min_df': 2,
-					'max_features': 500, 
 					'token_pattern': '(?u)\\b\\w\\w+\\b',
-					'ngram_range': (1,4),
-					'stop_words': stopwords.words('italian')
+					'ngram_range': (2,2)
 				}
 
 triple_tagger = { 	
 					'max_df': 0.95, 
 					'min_df': 2,
-					'max_features': 500, 
 					'token_pattern': '(?u)\\b\\w\\w+\\b',
 					'ngram_range': (3,3)
 				}
 
 
-swt = Tagger(dataset, single_tagger)
-swt.run("single")
+swt = Tagger(single_tagger)
+swt.run(500, dataset.lines, "single")
 
-dwt = Tagger(dataset, double_tagger)
-dwt.run("double")
+dwt = Tagger(double_tagger)
+dwt.run(500, dataset.lines, "double")
 
-twt = Tagger(dataset, triple_tagger)
-twt.run("triple")
+twt = Tagger(triple_tagger)
+twt.run(500, dataset.lines, "triple")
 
 print "Tagged elements with single tags: " + str(swt.get_tagged_elements())
 print "Tagged elements with double tags: " + str(dwt.get_tagged_elements())

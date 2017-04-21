@@ -22,8 +22,3 @@ class Dataset:
 				newlist.append(line)
 		self.lines = newlist
 
-	def get_words(self):
-		return self.words
-
-	def get_lines(self):
-		return self.lines
