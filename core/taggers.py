@@ -7,9 +7,11 @@ from collections import OrderedDict
 
 class Tagger(CountVectorizer):
 
+
 	def __init__(self, config):
 		self.tags = []
 		super(Tagger, self).__init__(**config)
+
 
 
 	def run(self, n_tags, docs, filename="", save=True, mf=True):
