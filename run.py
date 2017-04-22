@@ -1,6 +1,5 @@
 from core.dataset import *
 from core.taggers import Tagger
-from core.visualizers import MatrixVisualizer, WordVectorVisualizer
 from nltk.corpus import stopwords
 
 dataset = Dataset("dataset/prodotti.csv")

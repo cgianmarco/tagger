@@ -1,4 +1,3 @@
-import utils
 from utils import time_usage
 
 class Dataset:
