@@ -65,7 +65,7 @@ class Tagger(CountVectorizer):
 		with open("generated/tags_" + self.filename + ".txt", "wb") as f:
 				np.savetxt(f, self.tags, fmt="%s")
 
-	@time_usage("Getting tagged elements")
+	@time_usage("Getting tagged elements...")
 	def get_tagged_elements(self):
 		# return len(filter(lambda elem: elem != 0, np.sum(self.docterm.todense()[:, :self.n_tags], axis=1)))
 		tagged_elements = 0
