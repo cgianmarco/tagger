@@ -1,6 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 import numpy as np
 from collections import OrderedDict
+from utils import time_usage
 
 
 
@@ -13,34 +14,58 @@ class Tagger(CountVectorizer):
 		super(Tagger, self).__init__(**config)
 
 
-
-	def run(self, n_tags, docs, filename="", save=True, mf=True):
+	@time_usage("Running configuration...")
+	def run(self, n_tags, docs, filename="", save=True):
 		
 		self.n_tags = n_tags
 
-		self.docterm = self.fit_transform(docs)
+		self.docs = docs
 
-		self.cooccurrence = self.docterm.T * self.docterm
+		self.filename = filename
 
-		self.tag2frequency = OrderedDict(sorted([(word, self.docterm.getcol(idx).sum()) for word, idx in self.vocabulary_.items()], key = lambda x: -x[1])[:n_tags])
+		self.docterm = self.calc_docterm()
 
-		self.tags = self.tag2frequency.keys()
+		self.cooccurence = self.calc_cooccurence()
 
-		self.index = dict([(word, id_word) for word, id_word in self.vocabulary_.items() if word in self.tags])
+		self.tag2frequency = self.calc_tag2frequency()
+
+		self.tags = self.calc_tags()
+
+		self.index = self.calc_index()
 
 
 		if save:
-			# save tags
-			with open("generated/tags_" + filename + ".txt", "wb") as f:
-				np.savetxt(f, self.tags, fmt="%s")
-		# if mf:
-		# 	# save factorization matrix
-		# 	with open("generated/matrix_" + filename + ".txt", "wb") as f:
-		# 		np.savetxt(f, self.docterm.todense()[:, :self.n_tags], fmt="%s")
+			self.save_tags()
+			
 
 		return True
 
+	@time_usage("Calculating docterm...")
+	def calc_docterm(self):
+		return self.fit_transform(self.docs)
 
+	@time_usage("Calculating cooccurrence...")
+	def calc_cooccurence(self):
+		return self.docterm.T * self.docterm
+
+	@time_usage("Calculating tag2frequency...")
+	def calc_tag2frequency(self):
+		return OrderedDict(sorted([(word, self.docterm.getcol(idx).sum()) for word, idx in self.vocabulary_.items()], key = lambda x: -x[1])[:self.n_tags])
+
+	@time_usage("Calculating tags...")
+	def calc_tags(self):
+		return self.tag2frequency.keys()
+
+	@time_usage("Calculating index...")
+	def calc_index(self):
+		return dict([(word, id_word) for word, id_word in self.vocabulary_.items() if word in self.tags])
+
+	@time_usage("Saving tags...")
+	def save_tags(self):
+		with open("generated/tags_" + self.filename + ".txt", "wb") as f:
+				np.savetxt(f, self.tags, fmt="%s")
+
+	@time_usage("Getting tagged elements")
 	def get_tagged_elements(self):
 		# return len(filter(lambda elem: elem != 0, np.sum(self.docterm.todense()[:, :self.n_tags], axis=1)))
 		tagged_elements = 0
